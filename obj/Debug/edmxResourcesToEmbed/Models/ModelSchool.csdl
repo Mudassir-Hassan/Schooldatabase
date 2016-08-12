@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MySchooldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ClassDetail">
+    <Key>
+      <PropertyRef Name="ClassName" />
+    </Key>
+    <Property Name="ClassName" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Section" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Total_Students" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentDetail">
+    <Key>
+      <PropertyRef Name="Roll_No" />
+    </Key>
+    <Property Name="Roll_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Father_Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="StudentMark" Relationship="Self.FK_StudentMarks_StudentDetail" FromRole="StudentDetail" ToRole="StudentMarks" />
+  </EntityType>
+  <EntityType Name="StudentMark">
+    <Key>
+      <PropertyRef Name="Roll_No" />
+    </Key>
+    <Property Name="Roll_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Physics" Type="Int32" Nullable="false" />
+    <Property Name="Chemistry" Type="Int32" Nullable="false" />
+    <Property Name="Math" Type="Int32" Nullable="false" />
+    <Property Name="Total_Marks" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentDetail" Relationship="Self.FK_StudentMarks_StudentDetail" FromRole="StudentMarks" ToRole="StudentDetail" />
+  </EntityType>
+  <Association Name="FK_StudentMarks_StudentDetail">
+    <End Role="StudentDetail" Type="Self.StudentDetail" Multiplicity="1" />
+    <End Role="StudentMarks" Type="Self.StudentMark" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="StudentDetail">
+        <PropertyRef Name="Roll_No" />
+      </Principal>
+      <Dependent Role="StudentMarks">
+        <PropertyRef Name="Roll_No" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MySchooldbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ClassDetails" EntityType="Self.ClassDetail" />
+    <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+    <EntitySet Name="StudentMarks" EntityType="Self.StudentMark" />
+    <AssociationSet Name="FK_StudentMarks_StudentDetail" Association="Self.FK_StudentMarks_StudentDetail">
+      <End Role="StudentDetail" EntitySet="StudentDetails" />
+      <End Role="StudentMarks" EntitySet="StudentMarks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MySchooldbModelStoreContainer" CdmEntityContainer="MySchooldbEntities">
+    <EntitySetMapping Name="ClassDetails">
+      <EntityTypeMapping TypeName="MySchooldbModel.ClassDetail">
+        <MappingFragment StoreEntitySet="ClassDetails">
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Total_Students" ColumnName="Total Students" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentDetails">
+      <EntityTypeMapping TypeName="MySchooldbModel.StudentDetail">
+        <MappingFragment StoreEntitySet="StudentDetail">
+          <ScalarProperty Name="Roll_No" ColumnName="Roll No" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Father_Name" ColumnName="Father Name" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentMarks">
+      <EntityTypeMapping TypeName="MySchooldbModel.StudentMark">
+        <MappingFragment StoreEntitySet="StudentMarks">
+          <ScalarProperty Name="Roll_No" ColumnName="Roll No" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Physics" ColumnName="Physics" />
+          <ScalarProperty Name="Chemistry" ColumnName="Chemistry" />
+          <ScalarProperty Name="Math" ColumnName="Math" />
+          <ScalarProperty Name="Total_Marks" ColumnName="Total Marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

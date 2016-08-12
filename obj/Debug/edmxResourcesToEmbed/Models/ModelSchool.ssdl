@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MySchooldbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ClassDetails">
+    <Key>
+      <PropertyRef Name="ClassName" />
+    </Key>
+    <Property Name="ClassName" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Section" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Total Students" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentDetail">
+    <Key>
+      <PropertyRef Name="Roll No" />
+    </Key>
+    <Property Name="Roll No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Father Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Gender" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentMarks">
+    <Key>
+      <PropertyRef Name="Roll No" />
+    </Key>
+    <Property Name="Roll No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Physics" Type="int" Nullable="false" />
+    <Property Name="Chemistry" Type="int" Nullable="false" />
+    <Property Name="Math" Type="int" Nullable="false" />
+    <Property Name="Total Marks" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_StudentMarks_StudentDetail">
+    <End Role="StudentDetail" Type="Self.StudentDetail" Multiplicity="1" />
+    <End Role="StudentMarks" Type="Self.StudentMarks" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="StudentDetail">
+        <PropertyRef Name="Roll No" />
+      </Principal>
+      <Dependent Role="StudentMarks">
+        <PropertyRef Name="Roll No" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MySchooldbModelStoreContainer">
+    <EntitySet Name="ClassDetails" EntityType="Self.ClassDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentDetail" EntityType="Self.StudentDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentMarks" EntityType="Self.StudentMarks" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_StudentMarks_StudentDetail" Association="Self.FK_StudentMarks_StudentDetail">
+      <End Role="StudentDetail" EntitySet="StudentDetail" />
+      <End Role="StudentMarks" EntitySet="StudentMarks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
